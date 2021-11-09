@@ -1455,4 +1455,4 @@ INSERT INTO public.user_myaccount (user_myaccount_id, user_id, company_id) VALUE
 INSERT INTO public.user_myaccount (user_myaccount_id, user_id, company_id) VALUES (2277, 19078, 1019);
 INSERT INTO public.user_myaccount (user_myaccount_id, user_id, company_id) VALUES (2278, 19101, 727);
 INSERT INTO public.user_myaccount (user_myaccount_id, user_id, company_id) VALUES (2270, 19065, 727);
-INSERT INTO public.user_myaccount (user_myaccount_id, user_id, company_id) VALUES (2279, 179, 1020);
+ -- INSERT INTO public.user_myaccount (user_myaccount_id, user_id, company_id) VALUES (2279, 179, 1020);

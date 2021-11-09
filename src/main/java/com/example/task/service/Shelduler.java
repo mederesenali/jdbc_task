@@ -15,8 +15,9 @@ public class Shelduler {
 
     @Scheduled(fixedDelay = 10000)
     public void getUsers(){
-        log.info("All users"+service.getAllUsers().toString());
-        log.info("The Hire Talent TESTING -candidates"+service.getCandidatesByCompany("CMM Construction").toString());
+        log.info("Export Data"+service.getDataToExport());
+       // log.info("All users"+service.getAllUsers().toString());
+       // log.info("The Hire Talent TESTING -candidates"+service.getCandidatesByCompany("CMM Construction","test",10,1).toString());
 
     }
 }

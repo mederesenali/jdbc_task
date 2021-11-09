@@ -1,15 +1,13 @@
 package com.example.task.service;
 
-import com.example.task.model.CandidateMapper;
-import com.example.task.model.Candidates;
-import com.example.task.model.UserMapper;
-import com.example.task.model.UsersWithDep;
+import com.example.task.model.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.supercsv.cellprocessor.constraint.IsElementOf;
 
 import java.util.List;
 
@@ -37,16 +35,27 @@ public class Service {
 
     }
 
-    public  List<Candidates> getCandidatesByCompany(String companyName) {
+    public  List<Candidates> getCandidatesByCompany(String companyName,String keyword,int limit,int page) {
+
+
 
         var query="select  ccd.first_name,ccd.last_name,c.company_name from company_jobposting_candidate ccd\n" +
                 "inner join company_jobposting cj on ccd.company_jobposting_id = cj.company_jobposting_id\n" +
                 "inner join company c on cj.company_id = c.company_id\n" +
-                "where company_name=? order by first_name asc ";
+                "where company_name=?   order by first_name asc limit ? ";
 
-        return jdbcTemplate.query(query,new Object[]{companyName},
+        return jdbcTemplate.query(query,new Object[]{companyName,limit},
                 BeanPropertyRowMapper.newInstance(Candidates.class));
 
 
+    }
+
+    public List<ExportDto> getDataToExport(){
+
+        var query="select cj.company_id, company_name,cj.jobpost_title,cjc.last_name from  company\n" +
+                "inner join company_jobposting cj on company.company_id = cj.company_id\n" +
+                "inner join company_jobposting_candidate cjc on cj.company_jobposting_id = cjc.company_jobposting_id";
+
+       return jdbcTemplate.query(query,new ExportDtoMapper());
     }
 }
